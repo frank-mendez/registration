@@ -4,6 +4,7 @@ import {
   Controller,
   Delete,
   Get,
+  NotFoundException,
   Param,
   Patch,
   Post,
@@ -31,7 +32,12 @@ export class UsersController {
 
   @Get('/:id')
   getUserById(@Param('id') id: string): User {
-    return this.userService.getUserById(id);
+    const user = this.userService.getUserById(id);
+    console.log('user', user);
+    if (!user) {
+      throw new NotFoundException(`User with ID: ${id} not found`);
+    }
+    return user;
   }
 
   @Delete('/:id')
