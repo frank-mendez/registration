@@ -13,12 +13,13 @@ export class UsersService {
   }
 
   createUser(createUserDto: CreateUserDto): User {
-    const { firstName, lastName, email, address } = createUserDto;
+    const { firstName, lastName, email, password, address } = createUserDto;
     const user: User = {
       id: uuid(),
       firstName,
       lastName,
       email,
+      password,
       address,
       status: UserStatus.PENDING,
     };
